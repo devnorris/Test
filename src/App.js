@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import "./App.css";
+import { Provider } from "react-redux";
+
+import RestaurantsPage from "./Components/RestaurantsPage";
+import OrdersPage from "./Components/OrdersPage";
+import store from "./store";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Provider store={store}>
+        <div className="App">
+          <OrdersPage />
+          <RestaurantsPage />
+        </div>
+      </Provider>
     );
   }
 }
