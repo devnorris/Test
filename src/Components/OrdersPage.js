@@ -26,10 +26,12 @@ class OrdersPage extends Component {
             <tr>
               <th scope="row">1</th>
               <td>$45</td>
-              <td>edit</td>
-              <Button>
-                <td>delete</td>
-              </Button>
+              <td>
+                <Button>edit</Button>
+              </td>
+              <td>
+                <Button color="danger">delete</Button>{" "}
+              </td>
             </tr>
             <tr>
               <th scope="row">2</th>

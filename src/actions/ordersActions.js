@@ -55,8 +55,7 @@ export const listOrders = order => dispatch => {
     mode: "no-cors",
     data: {
       orderData: order
-    },
-    body: JSON.stringify(order)
+    }
   })
     .then(res => {
       console.log("res", res.type);
@@ -66,6 +65,6 @@ export const listOrders = order => dispatch => {
       });
     })
     .catch(error => {
-      console.log("LIST RESTAURANTS error", error);
+      console.log("LIST ORDERS error", error);
     });
 };
