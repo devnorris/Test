@@ -21,16 +21,19 @@ import { getTotal } from "../actions/ordersActions";
 import { createOrder } from "../actions/ordersActions";
 
 class RestaurantsPage extends React.Component {
+  // When component mounts, listRestaurants action is called and reducer is applied to get me restaurant data
   componentDidMount() {
     this.props.listRestaurants();
   }
 
+  // Gets amount selected (but applies to all items, looking into fixing)
   handleAmount = e => {
     e.preventDefault();
     const amount = e.target.value;
     this.props.saveAmount(amount);
   };
 
+  // Gets total of Items picked (only gets total of one item, looking into fixing)
   handleTotal = e => {
     e.preventDefault();
     const total = [];
@@ -38,6 +41,8 @@ class RestaurantsPage extends React.Component {
     this.props.getTotal(total);
   };
 
+  // Creates object order when sumbitted
+  // Also runs action createOrder but I dont get the order back in response
   onSubmit = e => {
     e.preventDefault();
     let order = {
@@ -49,6 +54,7 @@ class RestaurantsPage extends React.Component {
     this.props.createOrder(order);
   };
 
+  // Very long return/render that I would like to break down and make more readable/usable
   render() {
     return (
       <div>

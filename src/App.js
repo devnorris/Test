@@ -9,6 +9,7 @@ import {
   NavbarToggler
 } from "reactstrap";
 
+// Navbar always at top and allows for navigation to pages
 const Navigation = props => (
   <Navbar color="light" light expand="md">
     <NavbarBrand>
@@ -16,13 +17,13 @@ const Navigation = props => (
     </NavbarBrand>
     <Nav className="ml-auto" navbar>
       <NavItem>
-        <NavLink href="/orders">
-          <h3>Your Orders</h3>
+        <NavLink href="/restaurants">
+          <h3>Restaurants</h3>
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="/restaurants">
-          <h3>Restaurants</h3>
+        <NavLink href="/orders">
+          <h3>Your Orders</h3>
         </NavLink>
       </NavItem>
     </Nav>

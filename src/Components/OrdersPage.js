@@ -8,6 +8,8 @@ class OrdersPage extends Component {
     this.props.listOrders();
   }
 
+  // Was unable to get data back to populate orderslist
+  // Hard coded for now but am looking into it
   render() {
     console.log(this.props);
     return (
@@ -36,8 +38,12 @@ class OrdersPage extends Component {
             <tr>
               <th scope="row">2</th>
               <td>$30</td>
-              <td>edit</td>
-              <td>delete</td>
+              <td>
+                <Button>edit</Button>
+              </td>
+              <td>
+                <Button color="danger">delete</Button>{" "}
+              </td>
             </tr>
           </tbody>
         </Table>
