@@ -28,6 +28,11 @@ export default function(state = initialState, action) {
         ...state,
         order: action.payload
       };
+    case LIST_ORDERS:
+      return {
+        ...state,
+        orders: action.payload
+      };
     default:
       return state;
   }

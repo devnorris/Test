@@ -23,6 +23,7 @@ export const getTotal = total => dispatch => {
 };
 
 export const createOrder = order => dispatch => {
+  console.log("order", order);
   fetch("https://huddolapi-next.herokuapp.com/v1/challenge/", {
     method: "post",
     headers: {
@@ -31,9 +32,11 @@ export const createOrder = order => dispatch => {
     mode: "no-cors",
     data: {
       orderData: order
-    }
+    },
+    body: JSON.stringify(order)
   })
     .then(order => {
+      console.log("res", order);
       dispatch({
         type: CREATE_ORDER,
         payload: order
@@ -41,5 +44,29 @@ export const createOrder = order => dispatch => {
     })
     .catch(error => {
       console.log("CREATE ORDER error", error);
+    });
+};
+
+export const listOrders = order => dispatch => {
+  fetch("https://huddolapi-next.herokuapp.com/v1/challenge/", {
+    method: "get",
+    headers: {
+      "content-type": "application/json"
+    },
+    mode: "no-cors",
+    data: {
+      orderData: order
+    },
+    body: JSON.stringify(order)
+  })
+    .then(res => {
+      console.log("res", res.type);
+      dispatch({
+        type: LIST_ORDERS,
+        payload: order
+      });
+    })
+    .catch(error => {
+      console.log("LIST RESTAURANTS error", error);
     });
 };

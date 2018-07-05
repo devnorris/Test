@@ -7,12 +7,12 @@ import {
   FormGroup,
   Card,
   Button,
-  CardImg,
   CardTitle,
   CardText,
   CardDeck,
   CardSubtitle,
-  CardBody
+  CardBody,
+  NavLink
 } from "reactstrap";
 import { connect } from "react-redux";
 import { listRestaurants } from "../actions/restaurantsAction";
@@ -40,7 +40,12 @@ class RestaurantsPage extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    let order = this.props.orders.total;
+    let order = {
+      total: this.props.orders.total,
+      orderNum: Math.floor((1 + Math.random()) * 0x1000000)
+        .toString(16)
+        .substring(1)
+    };
     this.props.createOrder(order);
   };
 
@@ -114,9 +119,10 @@ class RestaurantsPage extends React.Component {
                           Your Total: $
                           {this.props.orders.total.reduce((a, b) => a + b)}
                           <Button type="Submit">Submit Order</Button>
+                          <a href="/orders">Order List</a>
                         </p>
                       ) : (
-                        <p>0</p>
+                        <p>Your Total: $0</p>
                       )}
                     </CardBody>
                   </Card>
