@@ -32,8 +32,7 @@ export const createOrder = order => dispatch => {
     mode: "no-cors",
     data: {
       orderData: order
-    },
-    body: JSON.stringify(order)
+    }
   })
     .then(order => {
       console.log("res", order);

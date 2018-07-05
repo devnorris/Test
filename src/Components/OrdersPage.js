@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { listOrders } from "../actions/ordersActions";
+import { Table, Button } from "reactstrap";
 
 class OrdersPage extends Component {
   componentDidMount() {
@@ -12,6 +13,32 @@ class OrdersPage extends Component {
     return (
       <div>
         <h1>Orders</h1>
+        <Table striped className="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>total</th>
+              <th>edit</th>
+              <th>delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>$45</td>
+              <td>edit</td>
+              <Button>
+                <td>delete</td>
+              </Button>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>$30</td>
+              <td>edit</td>
+              <td>delete</td>
+            </tr>
+          </tbody>
+        </Table>
       </div>
     );
   }

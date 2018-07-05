@@ -2,8 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  background-color: lightslategray;
-  padding-top: 60px;
+  background-color: white;
 }
 
 .restaurantList {
@@ -15,12 +14,18 @@ body {
   padding: 20px;
   margin: 1em;
   border: solid black 1px;
+  background-color: gainsboro;
 }
 
-.bg-light {
-  position: fixed;
-  background-color: silver !important;
-  width: 100%;
-  top: 0;
-  z-index: 1;
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: ghostwhite;
+  font-size: 18px;
+}
+
+.table {
+  background-color: gainsboro;
+  margin: auto;
+  width: 80% !important;
+  border-radius: 20px;
+  border: solid lightslategray;
 }

@@ -52,6 +52,7 @@ class RestaurantsPage extends React.Component {
   render() {
     return (
       <div>
+        <h1>Restaurants:</h1>
         <Form onSubmit={this.onSubmit}>
           <FormGroup>
             <CardDeck className="restaurantList">
@@ -59,8 +60,12 @@ class RestaurantsPage extends React.Component {
                 return (
                   <Card className="card">
                     <CardBody key={restaurant.id}>
-                      <CardTitle>{restaurant.name}</CardTitle>
-                      <CardSubtitle>Menu</CardSubtitle>
+                      <CardTitle>
+                        <h1>{restaurant.name}</h1>
+                      </CardTitle>
+                      <CardSubtitle>
+                        <h2>Menu</h2>
+                      </CardSubtitle>
                       <CardText>
                         <Table bordered>
                           <thead>
