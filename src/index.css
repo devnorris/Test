@@ -6,4 +6,11 @@ body {
 
 .restaurantList {
   display: inline-flex;
+  padding: 20px;
+}
+
+.card {
+  padding: 20px;
+  margin: 1em;
+  border: solid black 1px;
 }

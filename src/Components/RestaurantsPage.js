@@ -1,6 +1,10 @@
 import React from "react";
 import {
   Table,
+  Form,
+  Input,
+  Label,
+  FormGroup,
   Card,
   Button,
   CardImg,
@@ -12,70 +16,127 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { listRestaurants } from "../actions/restaurantsAction";
+import { saveAmount } from "../actions/ordersActions";
+import { getTotal } from "../actions/ordersActions";
+import { createOrder } from "../actions/ordersActions";
 
 class RestaurantsPage extends React.Component {
   componentDidMount() {
     this.props.listRestaurants();
   }
 
-  render() {
-    const restaurantList = this.props.restaurants.map(restaurant => {
-      return (
-        <CardDeck>
-          <Card className="card">
-            <CardImg
-              top="50%"
-              width="50%"
-              src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180"
-              alt="Card image cap"
-            />
-            <CardBody key={restaurant.id}>
-              <CardTitle>{restaurant.name}</CardTitle>
-              <CardSubtitle>Menu</CardSubtitle>
-              <CardText>
-                <Table>
-                  <tbody>
-                    <tr>
-                      <td>{restaurant.menu[0].name}</td>
-                      <td>{restaurant.menu[0].price}</td>
-                      <td>amount</td>
-                    </tr>
-                    <tr>
-                      <td>{restaurant.menu[1].name}</td>
-                      <td>{restaurant.menu[1].price}</td>
-                      <td>amount</td>
-                    </tr>
-                    <tr>
-                      <td>{restaurant.menu[2].name}</td>
-                      <td>{restaurant.menu[2].price}</td>
-                      <td>amount</td>
-                    </tr>
-                    <tr>
-                      <td>{restaurant.menu[3].name}</td>
-                      <td>{restaurant.menu[3].price}</td>
-                      <td>amount</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </CardText>
-              total
-              <Button>Button</Button>
-            </CardBody>
-          </Card>
-        </CardDeck>
-      );
-    });
+  handleAmount = e => {
+    e.preventDefault();
+    const amount = e.target.value;
+    this.props.saveAmount(amount);
+  };
 
-    return <div className="restaurantList">{restaurantList}</div>;
+  handleTotal = e => {
+    e.preventDefault();
+    const total = [];
+    total.push(e.target.value);
+    this.props.getTotal(total);
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    let order = this.props.orders.total;
+    this.props.createOrder(order);
+  };
+
+  render() {
+    return (
+      <div>
+        <Form onSubmit={this.onSubmit}>
+          <FormGroup>
+            <CardDeck className="restaurantList">
+              {this.props.restaurants.map(restaurant => {
+                return (
+                  <Card className="card">
+                    <CardBody key={restaurant.id}>
+                      <CardTitle>{restaurant.name}</CardTitle>
+                      <CardSubtitle>Menu</CardSubtitle>
+                      <CardText>
+                        <Table bordered>
+                          <thead>
+                            <tr>
+                              <th>Item</th>
+                              <th>Price</th>
+                              <th>Quantity</th>
+                              <th>Cost</th>
+                            </tr>
+                          </thead>
+                          {restaurant.menu.map((item, index) => {
+                            return (
+                              <tbody>
+                                <tr>
+                                  <td>{item.name}</td>
+                                  <td>${item.price}</td>
+                                  <td>
+                                    <Label for="exampleSelect" />
+                                    <Input
+                                      type="select"
+                                      name="select"
+                                      id="exampleSelect"
+                                      onChange={this.handleAmount}
+                                    >
+                                      <option>0</option>
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                    </Input>
+                                  </td>
+                                  {this.props.orders.amount ? (
+                                    <td>
+                                      {item.price * this.props.orders.amount}
+                                      <button
+                                        type="button"
+                                        value={
+                                          item.price * this.props.orders.amount
+                                        }
+                                        onClick={this.handleTotal}
+                                      >
+                                        Add
+                                      </button>
+                                    </td>
+                                  ) : (
+                                    <td>0</td>
+                                  )}
+                                </tr>
+                              </tbody>
+                            );
+                          })}
+                        </Table>
+                      </CardText>
+                      {this.props.orders.total ? (
+                        <p>
+                          Your Total: $
+                          {this.props.orders.total.reduce((a, b) => a + b)}
+                          <Button type="Submit">Submit Order</Button>
+                        </p>
+                      ) : (
+                        <p>0</p>
+                      )}
+                    </CardBody>
+                  </Card>
+                );
+              })}
+            </CardDeck>
+          </FormGroup>
+        </Form>
+      </div>
+    );
   }
 }
 
 // getting state from redux and maping to props so we have access to it
 const mapStateToProps = state => ({
-  restaurants: state.restaurants.restaurants
+  restaurants: state.restaurants.restaurants,
+  orders: state.orders
 });
 
 export default connect(
   mapStateToProps,
-  { listRestaurants }
+  { listRestaurants, saveAmount, getTotal, createOrder }
 )(RestaurantsPage);
